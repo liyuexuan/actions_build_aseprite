@@ -52,7 +52,7 @@ jobs:
         cd ..\..\..
         mv aseprite\build\bin\Aseprite-win-x64.zip .
     - name: Upload Windows artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         path: Aseprite-win-x64.zip
   build-linux:
@@ -158,12 +158,12 @@ jobs:
       with:
           path: Aseprite-mac-x64.zip
   Upload:
-    needs: [build-win,  build-macos, build-linux]
+    needs: [build-win]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Download artifacts
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v4
     - name: Get tag
       run: echo "atb=$(cat release-versions/version.json)" >> "$GITHUB_OUTPUT"
       id: links
